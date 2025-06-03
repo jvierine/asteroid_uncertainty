@@ -158,7 +158,7 @@ def estimate_keplerian(obs_range,
     
 times=epoch_et0+n.arange(10)*7*24*3600
 kep_true=n.array([2*sc.au/1e3,0.3,20,80,45,30])
-kep_guess=n.array([2.1*sc.au/1e3,0.31,21,81,46,31])
+kep_guess=n.array([2.2*sc.au/1e3,0.32,22,82,47,32])
 
 obs_range,obs_dec,obs_az,ap=simulate_measurement(kep_true,times=times)
 
@@ -190,7 +190,7 @@ print("True Keplerian parameters (RP,e,i,Omega,omega,nu)")
 print(kep_true)
 
 # estimate jacobian
-kep_dx=n.array([1e8,1,1,1,1,1])*0.001
+kep_dx=n.array([1e8,1,1,1,1,1])*0.0001
 nm=len(obs_range)
 # without range
 J0=n.zeros([2*nm,6])
