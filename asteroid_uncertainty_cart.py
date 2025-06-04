@@ -131,7 +131,7 @@ def estimate_keplerian(obs_range,
                        state_guess=n.array([2.1,0.25,23,82,48,27]),
                        use_range=True,
                        angle_std=5e-6,
-                       range_std=2,                       
+                       range_std=1,                       
                        times=epoch_et0+n.arange(100)*7*24*3600):
     def ss(x):
         model_range,model_dec,model_az,model_ap=simulate_measurement(x,epoch_et0,times=times)
@@ -143,7 +143,8 @@ def estimate_keplerian(obs_range,
 #        print(s)
         return(s)
     import scipy.optimize as sio
-    xhat=sio.minimize(ss,state_guess,method="Nelder-Mead",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(
+#    xhat=sio.minimize(ss,state_guess,method="Nelder-Mead",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(
+    xhat=sio.minimize(ss,state_guess,method="Powell",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(    
 #    xhat=sio.minimize(ss,state_guess,method="Nelder-Mead",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(    
 #    xhat=sio.minimize(ss,xhat,method="BFGS",tol=1e-6,options={'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(    
 #    xhat=sio.minimize(ss,xhat,method="Nelder-Mead").x#,bounds=[(-3,2),(-15,0),(0,180),(    
