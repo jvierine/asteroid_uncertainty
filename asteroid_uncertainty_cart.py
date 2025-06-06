@@ -140,7 +140,7 @@ def estimate_keplerian(obs_range,
         s+=n.sum((n.angle(n.exp(1j*model_az)*n.exp(-1j*obs_az))**2))/angle_std**2
         if use_range:
             s+=n.sum((obs_range-model_range)**2.0)/range_std**2
-        print(s)
+#        print(s)
         return(s)
     import scipy.optimize as sio
 #    xhat=sio.minimize(ss,state_guess,method="Nelder-Mead",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(
@@ -180,7 +180,7 @@ kep_true=n.array([2.158504572325312, # a (AU)
                   342.498256445095])  # mean anom at epoch
 
 state_true=get_initial_state(kep_true, epoch_et0)
-state_guess=state_true+0.001*n.array([1e4,1e4,1e4,0.1,0.1,0.1])
+state_guess=state_true+0.01*n.array([1e4,1e4,1e4,0.1,0.1,0.1])
 #print(state_true)
 obs_range,obs_dec,obs_az,ap=simulate_measurement(state_true,epoch_et0,times=times)
 lunar_dist=384400e3
