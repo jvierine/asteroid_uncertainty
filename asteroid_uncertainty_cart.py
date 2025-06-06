@@ -136,11 +136,11 @@ def estimate_keplerian(obs_range,
     def ss(x):
         model_range,model_dec,model_az,model_ap=simulate_measurement(x,epoch_et0,times=times)
         s=0.0
-        s+=n.sum((n.angle(n.exp(1j*model_dec)*n.exp(-1j*obs_dec))**2))/angle_std
-        s+=n.sum((n.angle(n.exp(1j*model_az)*n.exp(-1j*obs_az))**2))/angle_std
+        s+=n.sum((n.angle(n.exp(1j*model_dec)*n.exp(-1j*obs_dec))**2))/angle_std**2
+        s+=n.sum((n.angle(n.exp(1j*model_az)*n.exp(-1j*obs_az))**2))/angle_std**2
         if use_range:
-            s+=n.sum((obs_range-model_range)**2.0)/range_std
-#        print(s)
+            s+=n.sum((obs_range-model_range)**2.0)/range_std**2
+        print(s)
         return(s)
     import scipy.optimize as sio
 #    xhat=sio.minimize(ss,state_guess,method="Nelder-Mead",tol=1e-6,options={'maxfev':10000,'maxiter':10000,'disp': True}).x#,bounds=[(-3,2),(-15,0),(0,180),(
