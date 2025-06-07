@@ -180,7 +180,7 @@ kep_true=n.array([2.158504572325312, # a (AU)
                   342.498256445095])  # mean anom at epoch
 
 state_true=get_initial_state(kep_true, epoch_et0)
-state_guess=state_true+0.01*n.array([1e4,1e4,1e4,0.1,0.1,0.1])
+state_guess=state_true+0.2*n.array([1e4,1e4,1e4,0.1,0.1,0.1])
 #print(state_true)
 obs_range,obs_dec,obs_az,ap=simulate_measurement(state_true,epoch_et0,times=times)
 lunar_dist=384400e3
